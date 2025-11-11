@@ -6,6 +6,8 @@ import fetchMovies from '../../services/movieService';
 import SearchBar from '../SearchBar/SearchBar';
 import toast from 'react-hot-toast';
 import MovieGrid from '../MovieGrid/MovieGrid';
+import Loader from '../Loader/Loader';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
 
 function App() {
   const [topic, setTopic] = useState<string>('');
@@ -45,10 +47,8 @@ function App() {
     <>
       <SearchBar onSubmit={handleSearch} />
 
-      {isLoading && <p className={css.text}>Loading movies, please wait...</p>}
-      {isError && (
-        <p className={css.text}>There was an error, please try again...</p>
-      )}
+      {isLoading && { Loader }}
+      {isError && { ErrorMessage }}
 
       {movies.length > 0 && (
         <MovieGrid movies={movies} onSelect={handleSelect} />
