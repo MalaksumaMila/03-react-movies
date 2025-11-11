@@ -16,15 +16,12 @@ function App() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
   const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const openModal = () => setIsModalOpen(true);
-
-  const closeModal = () => setIsModalOpen(false);
 
   const handleSearch = (q: string) => setTopic(q);
   const handleSelect = (movie: Movie) => setSelectedMovie(movie);
-
+  const closeModal = () => {
+    setSelectedMovie(null);
+  };
   useEffect(() => {
     const loadMovies = async () => {
       if (!topic.trim()) return;
@@ -59,7 +56,9 @@ function App() {
       {movies.length > 0 && (
         <MovieGrid movies={movies} onSelect={handleSelect} />
       )}
-      {selectedMovie && <MovieModal onClose={closeModal} />}
+      {selectedMovie && (
+        <MovieModal movie={selectedMovie} onClose={closeModal} />
+      )}
     </div>
   );
 }

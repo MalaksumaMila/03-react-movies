@@ -28,7 +28,12 @@ export default function MovieModal({ movie, onClose }: MovieModalProps) {
   };
 
   return createPortal(
-    <div className={css.backdrop} role="dialog" aria-modal="true">
+    <div
+      className={css.backdrop}
+      role="dialog"
+      aria-modal="true"
+      onClick={handleBackdropClick}
+    >
       <div className={css.modal}>
         <button className={css.closeButton} aria-label="Close modal">
           &times;
@@ -39,13 +44,13 @@ export default function MovieModal({ movie, onClose }: MovieModalProps) {
           className={css.image}
         />
         <div className={css.content}>
-          <h2>movie_title</h2>
-          <p>movie_overview</p>
+          <h2>{movie.title}</h2>
+          <p>{movie.overview}</p>
           <p>
-            <strong>Release Date:</strong> movie_release_date
+            <strong>Release Date:</strong> {movie.release_date}
           </p>
           <p>
-            <strong>Rating:</strong> movie_vote_average/10
+            <strong>Rating:</strong> {movie.vote_average}/10
           </p>
         </div>
       </div>
