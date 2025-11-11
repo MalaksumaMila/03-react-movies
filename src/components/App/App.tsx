@@ -8,6 +8,7 @@ import toast from 'react-hot-toast';
 import MovieGrid from '../MovieGrid/MovieGrid';
 import Loader from '../Loader/Loader';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import MovieModal from '../MovieModal/MovieModal';
 
 function App() {
   const [topic, setTopic] = useState<string>('');
@@ -15,6 +16,11 @@ function App() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
   const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => setIsModalOpen(true);
+
+  const closeModal = () => setIsModalOpen(false);
 
   const handleSearch = (q: string) => setTopic(q);
   const handleSelect = (movie: Movie) => setSelectedMovie(movie);
@@ -47,12 +53,13 @@ function App() {
     <div className={css.app}>
       <SearchBar onSubmit={handleSearch} />
 
-      {isLoading && { Loader }}
-      {isError && { ErrorMessage }}
+      {isLoading && <Loader />}
+      {isError && <ErrorMessage />}
 
       {movies.length > 0 && (
         <MovieGrid movies={movies} onSelect={handleSelect} />
       )}
+      {selectedMovie && <MovieModal onClose={closeModal} />}
     </div>
   );
 }
