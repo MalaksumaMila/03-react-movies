@@ -12,8 +12,10 @@ function App() {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isError, setIsError] = useState<boolean>(false);
+  const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
 
   const handleSearch = (q: string) => setTopic(q);
+  const handleSelect = (movie: Movie) => setSelectedMovie(movie);
 
   useEffect(() => {
     const loadMovies = async () => {
@@ -42,11 +44,15 @@ function App() {
   return (
     <>
       <SearchBar onSubmit={handleSearch} />
+
       {isLoading && <p className={css.text}>Loading movies, please wait...</p>}
       {isError && (
         <p className={css.text}>There was an error, please try again...</p>
       )}
-      <MovieGrid />
+
+      {movies.length > 0 && (
+        <MovieGrid movies={movies} onSelect={handleSelect} />
+      )}
     </>
   );
 }
