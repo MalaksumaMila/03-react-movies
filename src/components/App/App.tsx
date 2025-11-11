@@ -44,7 +44,7 @@ function App() {
   }, [topic]);
 
   return (
-    <>
+    <div className={css.app}>
       <SearchBar onSubmit={handleSearch} />
 
       {isLoading && { Loader }}
@@ -53,7 +53,7 @@ function App() {
       {movies.length > 0 && (
         <MovieGrid movies={movies} onSelect={handleSelect} />
       )}
-    </>
+    </div>
   );
 }
 
