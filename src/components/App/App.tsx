@@ -48,7 +48,7 @@ function App() {
 
   return (
     <div className={css.app}>
-      <Toaster position= />
+      <Toaster position="top-center" />
       <SearchBar onSubmit={handleSearch} />
 
       {isLoading && <Loader />}
