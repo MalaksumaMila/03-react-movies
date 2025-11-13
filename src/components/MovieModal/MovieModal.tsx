@@ -35,12 +35,16 @@ export default function MovieModal({ movie, onClose }: MovieModalProps) {
       onClick={handleBackdropClick}
     >
       <div className={css.modal}>
-        <button className={css.closeButton} aria-label="Close modal">
+        <button
+          className={css.closeButton}
+          onClick={onClose}
+          aria-label="Close modal"
+        >
           &times;
         </button>
         <img
-          src="https://image.tmdb.org/t/p/original/backdrop_path"
-          alt="movie_title"
+          src="https://image.tmdb.org/t/p/original`${movie.poster_path}`"
+          alt={movie.title}
           className={css.image}
         />
         <div className={css.content}>
