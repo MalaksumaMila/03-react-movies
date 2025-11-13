@@ -4,7 +4,7 @@ import css from './App.module.css';
 import type { Movie } from '../../types/movie';
 import fetchMovies from '../../services/movieService';
 import SearchBar from '../SearchBar/SearchBar';
-import toast from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
 import MovieGrid from '../MovieGrid/MovieGrid';
 import Loader from '../Loader/Loader';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
@@ -48,6 +48,7 @@ function App() {
 
   return (
     <div className={css.app}>
+      <Toaster position="top-right" />
       <SearchBar onSubmit={handleSearch} />
 
       {isLoading && <Loader />}
